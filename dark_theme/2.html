@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem ipsum dolor</title>
+    <style>
+        body {
+            height: 100vh;
+        }
+
+        body.dark_theme {
+            background-color: darkblue;
+            color: gold;
+        }
+
+        body a {
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" id="theme_toggle">Темная тема</a>
+    <h1>Lorem ipsum dolor</h1>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam orci sapien, suscipit in hendrerit ut, luctus ac
+        neque. Vestibulum sit amet lectus sed elit suscipit sagittis vel ac mi. Curabitur sit amet lobortis libero.
+        Morbi ullamcorper faucibus enim, at laoreet ipsum pellentesque sit amet. Nullam pulvinar, libero id varius
+        laoreet, mauris nulla ornare elit, placerat feugiat tortor ipsum id dui. Curabitur ullamcorper, lacus eu
+        dignissim imperdiet, turpis ex accumsan risus, sit amet porttitor neque enim posuere purus. Aliquam erat
+        volutpat. Proin ligula lacus, aliquet eu ligula a, pretium molestie turpis. Pellentesque congue magna vehicula
+        lacinia tristique. Aliquam dui ligula, finibus eu nibh tristique, congue pulvinar arcu. Morbi dictum nisi eget
+        enim faucibus, sit amet commodo massa pharetra. Curabitur sit amet arcu maximus nulla tristique tempor
+        pellentesque a neque. Suspendisse placerat vehicula nisl, malesuada tempus quam malesuada et. Phasellus a
+        tincidunt quam. Aliquam non justo tempus, placerat eros at, rhoncus ex.</p>
+
+    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Pellentesque habitant
+        morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque vitae rhoncus magna. Mauris
+        varius maximus nisi, pellentesque sollicitudin arcu consequat vitae. Sed tempus id justo ac pretium. Phasellus
+        mattis tortor ac diam mattis, sed porttitor odio consectetur. Fusce tortor ante, tristique vitae nunc in,
+        porttitor venenatis sapien. Duis orci lectus, viverra a eros eget, iaculis rutrum nunc.</p>
+
+    <p>
+        Etiam pulvinar id velit in sagittis. Donec convallis metus eget lorem viverra feugiat. Donec sapien enim,
+        fermentum in auctor varius, pharetra nec nulla. Phasellus pellentesque sollicitudin metus eget malesuada. In non
+        libero tincidunt, lacinia dolor a, lacinia nisi. Aenean quis justo nisi. Mauris bibendum neque eget augue
+        interdum, at placerat tellus feugiat. Mauris nec nunc ornare, gravida diam sit amet, commodo dolor. Nullam
+        auctor nunc id risus fermentum dictum. Aliquam risus dui, porttitor et odio non, molestie vehicula velit. Sed
+        egestas ante sit amet nisl semper efficitur. Phasellus viverra, turpis euismod tempor pharetra, leo libero
+        mollis nulla, et aliquet nibh diam vitae lorem.</p>
+
+    <script>
+        document.querySelector("#theme_toggle").addEventListener("click", (event) => {
+
+            event.preventDefault();
+
+            document.body.classList.toggle('dark_theme');
+
+            event.target.textContent = document.body.classList.contains('dark_theme') ? 'Светлая тема' : 'Темная тема';
+        });
+
+        // Сократили код:
+        // воспользовались прямой ссылкой на body,
+        // заменили if/else на тернарный оператор
+        // Почитать: https://learn.javascript.ru/traversing-dom
+        // https://learn.javascript.ru/ifelse#uslovnyy-operator
+    </script>
+
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-4 offset-4">
+                <form id="auth_form" class="mb-3">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" autocomplete="off" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <a href="#" class="ml-3">Регистрация</a>
+                </form>
+                <div class="alert alert-success d-none" id="auth_success">Добро пожаловать!</div>
+                <div class="alert alert-danger d-none" id="auth_error">Неверный email или пароль!</div>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+        <script>
+            
+            // из БД
+            const users = [
+                {
+                    id: '1',
+                    email: 'sammy@example.com',
+                    password: 'cGFzc3dvcmQ='
+                },
+                {
+                    id: '1',
+                    email: 'tommy@example.com',
+                    password: 'c2VjcmV0'
+                }
+            ];
+
+            // функция принимает на вход строки c email и паролем
+            // делает хэш от пароля и ищет в массиве польователей
+            // пользователя с таким email и хэшем пароля
+            // если находит, возвращает true иначе false
+            function attempt (email, password) {
+                const hashedPassword = btoa(password);
+                const result = users.findIndex((user) => {
+                    return (user.email === email) && (user.password === hashedPassword);
+                });
+                return result >= 0;
+            }
+
+            document.querySelector("#auth_form").addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                document.querySelectorAll("#auth_success, #auth_error").forEach((element) => {
+                    element.classList.add("d-none");
+                });
+
+                let email = event.target.querySelector("#email").value;
+                    email = email.trim();
+
+                let password = event.target.querySelector("#password").value;
+                email = email.trim();
+
+                if(attempt(email, password)) {
+                    document.querySelector("#auth_success").classList.toggle("d-none");
+
+                    event.target.reset();
+
+                    setTimeout(() => {
+                        document.querySelector("#auth_success").classList.toggle("d-none");
+                    }, 2000);
+
+                } else {
+                    document.querySelector("#auth_error").classList.toggle("d-none");
+                }
+            });
+
+            // Добавили: trim значений полей формы, сброс формы при успешной аутентификации, и сокрытие сообщения об успехе.
+            // Почитать: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            // https://developer.mozilla.org/ru/docs/Web/API/HTMLFormElement/reset
+            // https://developer.mozilla.org/ru/docs/Web/API/WindowTimers/setTimeout
+        </script>
+</html>
